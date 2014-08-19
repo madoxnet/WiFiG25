@@ -77,7 +77,7 @@ bootm 0x22000000 - 0x21000000
 ```
 
 #Examples
-
+##GPIO
 ##PWM
 ###Exporting PWM
 ```
@@ -109,3 +109,7 @@ echo 500000 > /sys/class/pwm/pwmchip4/pwm0/duty_cycle
 ```
 echo 2500000 > /sys/class/pwm/pwmchip4/pwm0/duty_cycle
 ```
+##I2C
+##SPI
+##ADC
+##1-Wire

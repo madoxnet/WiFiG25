@@ -31,6 +31,11 @@ echo "export PATH=/opt/codesourcery/arm-2011.09/bin:$PATH" >> ~/.bashrc
 ```
 
 #Linux
+##Clone the git repository
+```
+git clone git://github.com/linux4sam/linux-at91.git -b linux-3.15.0-at91
+```
+
 ```
 export ARCH=arm 
 export CROSS_COMPILE=arm-none-linux-gnueabi-
@@ -44,3 +49,37 @@ make uImage
 #Buildroot
 
 #Manual Loading
+
+#Examples
+
+##PWM
+###Exporting PWM
+```
+echo 0 > /sys/class/pwm/pwmchip0/export
+echo 1 > /sys/class/pwm/pwmchip0/export
+echo 2 > /sys/class/pwm/pwmchip0/export
+echo 3 > /sys/class/pwm/pwmchip0/export
+```
+###Exporting TCB-PWM
+```
+echo 0 > /sys/class/pwm/pwmchip4/export
+echo 1 > /sys/class/pwm/pwmchip4/export
+```
+###Using PWM
+```
+echo 1000000 > /sys/class/pwm/pwmchip0/pwm0/period 
+echo 500000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
+echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
+```
+###Running a servo
+```
+echo 20000000 > /sys/class/pwm/pwmchip4/pwm0/period 
+echo 1500000 > /sys/class/pwm/pwmchip4/pwm0/duty_cycle
+echo 1 > /sys/class/pwm/pwmchip4/pwm0/enable
+```
+```
+echo 500000 > /sys/class/pwm/pwmchip4/pwm0/duty_cycle
+```
+```
+echo 2500000 > /sys/class/pwm/pwmchip4/pwm0/duty_cycle
+```

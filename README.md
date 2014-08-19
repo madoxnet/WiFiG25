@@ -49,6 +49,32 @@ make uImage
 #Buildroot
 
 #Manual Loading
+This is probably only required for the early releases of the board where the recovery u-boot was not implemented
+##Using USB
+###Rootfs
+```
+fatload usb 0 0x22000000 rootfs.ubi
+nand erase 0x800000 0xf800000
+nand write.trimffs 0x22000000 0x800000 0x4000000
+```
+###DTB
+```
+fatload usb 0 0x21000000 at91-wifig25.dtb
+nand erase 0x180000 0x20000
+nand write 0x21000000 0x180000 0x20000
+```
+###Kernel
+```
+fatload usb 0 0x22000000 uImage
+nand erase 0x200000 0x600000
+nand write 0x22000000 0x200000 0x600000
+```
+###Manually boot a DTB and Kernel without saving to NAND
+```
+fatload usb 0 0x21000000 at91-wifig25.dtb
+fatload usb 0 0x22000000 uImage.test
+bootm 0x22000000 - 0x21000000
+```
 
 #Examples
 

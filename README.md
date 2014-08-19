@@ -110,6 +110,40 @@ echo 500000 > /sys/class/pwm/pwmchip4/pwm0/duty_cycle
 echo 2500000 > /sys/class/pwm/pwmchip4/pwm0/duty_cycle
 ```
 ##I2C
+```
+//Example code for BH1750FVL Light Sensor Modules
+//
+//The modules are based off the ROHM BH1750FVL Ambient Light Sensor IC's and are 
+//available from eBay for less than $3 delivered worldwide.
+//
+//This example code does not handle errors etc, search for proper code handling
+//examples online.
+
+#include <stdio.h>
+#include <linux/i2c-dev.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+
+#define SENSOR_ADDRESS 0x23
+
+int main()
+{
+  int fd;
+  char data[2];
+  float light;
+  char command = 0x20;  //One Medium Resolution Read
+  
+  fd = open( "/dev/i2c-0", O_RDWR );
+  ioctl( fd, I2C_SLAVE, SENSOR_ADDRESS );
+  write( fd, &command, 1 );
+  read( fd, data, 2 );
+  light = (float) ( ( data[0] << 8 ) | data[1] ) / 1.2;
+  printf( "%04f\n", light );
+}
+```
+```
+arm-none-linux-gnueabi-gcc lightread.c -o lightread
+```
 ##SPI
 ##ADC
 ##1-Wire

@@ -76,6 +76,17 @@ fatload usb 0 0x22000000 uImage.test
 bootm 0x22000000 - 0x21000000
 ```
 
+#Manual Loading of AT91Bootstrap & Uboot
+Here be dragons - do not do this unless absolutely necessary.
+##AT91Bootstrap
+```
+```
+##U-Boot
+```
+fatload usb 0 0x22000000 u-boot.bin
+nand erase 0x40000 0x80000
+nand write 0x22000000 0x40000 0x80000
+```
 #Examples
 ##GPIO
 ##PWM
